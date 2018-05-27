@@ -1,5 +1,6 @@
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { AuthHttp } from 'angular2-jwt';
 
 import "rxjs/add/operator/toPromise";
 
@@ -14,12 +15,9 @@ export class CategoriaService {
 
   categoriasUrl = 'http://localhost:8080/categorias';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   pesquisar(filtro: CategoriaFiltro): Promise<any>{
-
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     const params = new URLSearchParams();
 
@@ -31,7 +29,7 @@ export class CategoriaService {
     }
 
 
-    return this.http.get(`${this.categoriasUrl}?pesquisa`, {headers, search: params})
+    return this.http.get(`${this.categoriasUrl}?pesquisa`, { search: params})
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -47,10 +45,8 @@ export class CategoriaService {
   }
 
   listarTodas(): Promise<any> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.get(this.categoriasUrl, { headers })
+    return this.http.get(this.categoriasUrl)
       .toPromise()
       .then(response => response.json());
   }
