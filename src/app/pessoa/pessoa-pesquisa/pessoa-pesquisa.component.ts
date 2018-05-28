@@ -4,6 +4,7 @@ import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { ToastyService } from 'ng2-toasty';
 import { ConfirmationService } from 'primeng/components/common/api';
 import { ErrorHandlerService } from '../../core/error-handler.service';
+import { AuthService } from '../../seguranca/auth.service';
 
 @Component({
   selector: 'app-pessoa-pesquisa',
@@ -21,7 +22,9 @@ export class PessoaPesquisaComponent implements OnInit {
     private pessoaService: PessoaService,
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
-    private errorHandler: ErrorHandlerService){ }
+    private errorHandler: ErrorHandlerService,
+    private auth: AuthService
+  ){ }
 
   ngOnInit(){
   }

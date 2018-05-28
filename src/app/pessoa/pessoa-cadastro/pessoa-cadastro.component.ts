@@ -6,6 +6,7 @@ import { Pessoa } from '../../core/model';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from '../../seguranca/auth.service';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -22,7 +23,8 @@ export class PessoaCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title
+    private title: Title,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {

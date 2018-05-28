@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CategoriaFiltro, CategoriaService } from '../categoria.service';
 import { ToastyService } from 'ng2-toasty';
+
+import { CategoriaFiltro, CategoriaService } from '../categoria.service';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/components/common/api';
 import { ErrorHandlerService } from '../../core/error-handler.service';
+import { AuthService } from '../../seguranca/auth.service';
 
 @Component({
   selector: 'app-categoria-pesquisa',
@@ -20,7 +22,9 @@ export class CategoriaPesquisaComponent implements OnInit {
     private categoriaService: CategoriaService,
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
-    private errorHandler: ErrorHandlerService){ }
+    private errorHandler: ErrorHandlerService,
+    private auth: AuthService
+  ){ }
 
   ngOnInit() {
   }

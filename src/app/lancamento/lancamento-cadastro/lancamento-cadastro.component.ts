@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 import { LancamentoService } from '../lancamento.service';
 import { ToastyService } from 'ng2-toasty';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from '../../seguranca/auth.service';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title
+    private title: Title,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
