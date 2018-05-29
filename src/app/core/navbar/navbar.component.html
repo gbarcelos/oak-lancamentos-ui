@@ -4,8 +4,6 @@
     <div class="ui-g">
       <div class="ui-g-12">
         <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i class="fa fa-bars"></i></a>
-
-        <button type="button" (click)="criarNovoAccessToken()">Novo access token</button>
       </div>
     </div>
   </div>
@@ -21,6 +19,6 @@
     <li class="navbar-menuitem" routerLinkActive="ativo"
       *ngIf="auth.temPermissao('ROLE_PESQUISAR_CATEGORIA')"><a routerLink="/categorias">Categorias</a></li>
     
-    <li class="navbar-menuitem"><a href="#">Logout</a></li>
+      <li class="navbar-menuitem"><a href="javascript:;" (click)="logout()">Logout</a></li>
   </ul>
 </nav>

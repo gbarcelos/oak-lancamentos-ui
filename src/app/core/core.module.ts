@@ -20,6 +20,7 @@ import { LancamentoModule } from '../lancamento/lancamento.module';
 import { PessoaModule } from '../pessoa/pessoa.module';
 import { SegurancaModule } from '../seguranca/seguranca.module';
 import { AuthService } from '../seguranca/auth.service';
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { AuthService } from '../seguranca/auth.service';
 
 
   ],
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
+  declarations: [NavbarComponent, PaginaNaoEncontradaComponent, NaoAutorizadoComponent],
   exports: [
     NavbarComponent,
     ToastyModule,

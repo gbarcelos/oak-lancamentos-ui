@@ -62,6 +62,16 @@ export class AuthService {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
 
+  temQualquerPermissao(roles) {
+    for (const role of roles) {
+      if (this.temPermissao(role)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   obterNovoAccessToken(): Promise<void> {
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -89,5 +99,10 @@ export class AuthService {
     const token = localStorage.getItem('token');
 
     return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
   }
 }

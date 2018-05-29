@@ -13,6 +13,8 @@ import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { MoneyHttp } from './money-http';
+import { AuthGuard } from './auth.guard';
+import { LogoutService } from './logout.service';
 
 export function authHttpServiceFactory(auth: AuthService, http: Http, options: RequestOptions) {
   const config = new AuthConfig({
@@ -40,7 +42,9 @@ export function authHttpServiceFactory(auth: AuthService, http: Http, options: R
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [AuthService, Http, RequestOptions]
-    }
+    },
+    AuthGuard,
+    LogoutService
   ]
 })
 export class SegurancaModule { }
