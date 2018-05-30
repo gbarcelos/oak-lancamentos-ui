@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
 
 import "rxjs/add/operator/toPromise";
+import { environment } from 'environments/environment';
 
 export class CategoriaFiltro{
   nome: string;
@@ -13,9 +14,11 @@ export class CategoriaFiltro{
 @Injectable()
 export class CategoriaService {
 
-  categoriasUrl = 'http://localhost:8080/categorias';
+  categoriasUrl: string;
 
-  constructor(private http: AuthHttp) { }
+  constructor(private http: AuthHttp) {
+    this.categoriasUrl = `${environment.apiUrl}/categorias`;
+  }
 
   pesquisar(filtro: CategoriaFiltro): Promise<any>{
 
