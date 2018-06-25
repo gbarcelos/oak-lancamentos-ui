@@ -1,9 +1,11 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { LancamentoPesquisaComponent } from "./lancamento-pesquisa/lancamento-pesquisa.component";
-import { LancamentoCadastroComponent } from "./lancamento-cadastro/lancamento-cadastro.component";
-import { AuthGuard } from "../seguranca/auth.guard";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { LancamentoPesquisaComponent } from './lancamento-pesquisa/lancamento-pesquisa.component';
+import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
+import { AuthGuard } from '../seguranca/auth.guard';
 
 const routes: Routes = [
     {

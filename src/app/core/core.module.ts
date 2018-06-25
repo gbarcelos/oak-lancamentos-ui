@@ -1,11 +1,12 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
 import { ToastyModule } from 'ng2-toasty';
 import { JwtHelper } from 'angular2-jwt';
 
-import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
-import { ConfirmationService } from 'primeng/components/common/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorHandlerService } from './error-handler.service';
@@ -22,6 +23,7 @@ import { SegurancaModule } from '../seguranca/seguranca.module';
 import { AuthService } from '../seguranca/auth.service';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
 
+registerLocaleData(localePt);
 
 @NgModule({
   imports: [
@@ -38,7 +40,11 @@ import { NaoAutorizadoComponent } from './nao-autorizado.component';
 
 
   ],
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent, NaoAutorizadoComponent],
+  declarations: [
+    NavbarComponent,
+    PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
+  ],
   exports: [
     NavbarComponent,
     ToastyModule,
@@ -53,7 +59,7 @@ import { NaoAutorizadoComponent } from './nao-autorizado.component';
   ErrorHandlerService,
   Title,
   JwtHelper,
-  {provide: LOCALE_ID, useValue: 'pt-BR'}
+  {provide: LOCALE_ID, useValue: 'pt'}
   ]
 })
 export class CoreModule { }

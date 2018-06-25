@@ -5,8 +5,8 @@ import { Http, RequestOptions } from '@angular/http';
 
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
-import { ButtonModule } from 'primeng/components/button/button';
-import { InputTextModule } from 'primeng/components/inputtext/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 

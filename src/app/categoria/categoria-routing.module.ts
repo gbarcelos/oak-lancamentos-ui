@@ -1,8 +1,8 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from "../seguranca/auth.guard";
-import { CategoriaPesquisaComponent } from "./categoria-pesquisa/categoria-pesquisa.component";
+import { AuthGuard } from '../seguranca/auth.guard';
+import { CategoriaPesquisaComponent } from './categoria-pesquisa/categoria-pesquisa.component';
 
 const routes: Routes = [
     {

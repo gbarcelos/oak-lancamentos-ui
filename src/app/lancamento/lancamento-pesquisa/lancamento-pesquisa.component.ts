@@ -26,13 +26,13 @@ export class LancamentoPesquisaComponent implements OnInit{
     private errorHandler: ErrorHandlerService,
     private title: Title,
     private auth: AuthService,
-    ){ }
+    ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.title.setTitle('Pesquisa de Lançamentos');
   }
 
-  pesquisar(pagina = 0){
+  pesquisar(pagina = 0) {
 
     this.filtro.pagina = pagina;
 
@@ -45,12 +45,12 @@ export class LancamentoPesquisaComponent implements OnInit{
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  aoMudarPagina(event: LazyLoadEvent){
+  aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
   }
 
-  confirmacaoExcluir(lancamento: any){
+  confirmacaoExcluir(lancamento: any) {
 
     this.confirmation.confirm({
       message: 'Tem certeza que deseja excluir?',
@@ -61,12 +61,12 @@ export class LancamentoPesquisaComponent implements OnInit{
 
   }
 
-  excluir(lancamento: any){
+  excluir(lancamento: any) {
     this.lancamentoService.excluir(lancamento.codigo)
       .then(() => {
-        if (this.grid.first === 0){
+        if (this.grid.first === 0) {
           this.pesquisar();
-        }else{
+        } else {
           this.grid.first = 0;
         }
         this.toasty.success('Lancamento excluído com sucesso');

@@ -1,14 +1,14 @@
 import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
-import "rxjs/add/operator/toPromise";
+import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
 
 import { Lancamento } from '../core/model';
 import { AuthHttp } from 'angular2-jwt';
 import { environment } from 'environments/environment';
 
-export class LancamentoFiltro{
+export class LancamentoFiltro {
   descricao: string;
   dataVencimentoInicio: Date;
   dataVencimentoFim: Date;
@@ -25,24 +25,24 @@ export class LancamentoService {
     this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
    }
 
-  pesquisar(filtro: LancamentoFiltro): Promise<any>{
+  pesquisar(filtro: LancamentoFiltro): Promise<any> {
 
     const params = new URLSearchParams();
 
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.itensPorPagina.toString());
 
-    if (filtro.descricao){
+    if (filtro.descricao) {
       params.set('descricao', filtro.descricao);
     }
 
-    if (filtro.dataVencimentoInicio){
-      params.set('dataVencimentoDe', 
+    if (filtro.dataVencimentoInicio) {
+      params.set('dataVencimentoDe',
         moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));
     }
 
-    if (filtro.dataVencimentoFim){
-      params.set('dataVencimentoAte', 
+    if (filtro.dataVencimentoFim) {
+      params.set('dataVencimentoAte',
         moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
@@ -62,7 +62,7 @@ export class LancamentoService {
       });
   }
 
-  excluir(codigo: number): Promise<void>{
+  excluir(codigo: number): Promise<void> {
 
     return this.http.delete(`${this.lancamentosUrl}/${codigo}`)
       .toPromise()

@@ -2,15 +2,15 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DropdownModule } from 'primeng/components/dropdown/dropdown';
-import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton';
-import { CalendarModule } from 'primeng/components/calendar/calendar';
-import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
-import { TooltipModule } from 'primeng/components/tooltip/tooltip';
-import { DataTableModule } from 'primeng/components/datatable/datatable';
-import { ButtonModule } from 'primeng/components/button/button';
-import { InputTextModule } from 'primeng/components/inputtext/inputtext';
-import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
+import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TooltipModule } from 'primeng/tooltip';
+import { DataTableModule } from 'primeng/datatable';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
 
 import { SharedModule } from './../shared/shared.module';
 

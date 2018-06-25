@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { CategoriaService } from '../../categoria/categoria.service';
-import { ErrorHandlerService } from '../../core/error-handler.service';
-import { PessoaService } from '../../pessoa/pessoa.service';
-import { Lancamento } from '../../core/model';
-import { FormControl } from '@angular/forms';
-import { LancamentoService } from '../lancamento.service';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastyService } from 'ng2-toasty';
 import { Title } from '@angular/platform-browser';
-import { AuthService } from '../../seguranca/auth.service';
 
+import { AuthService } from '../../seguranca/auth.service';
+import { ErrorHandlerService } from '../../core/error-handler.service';
+import { Lancamento } from '../../core/model';
+import { LancamentoService } from '../lancamento.service';
+import { CategoriaService } from '../../categoria/categoria.service';
+import { PessoaService } from '../../pessoa/pessoa.service';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -30,6 +29,8 @@ export class LancamentoCadastroComponent implements OnInit {
 
   lancamento = new Lancamento();
 
+  formulario: FormGroup;
+
   constructor(
     private lancamentoService: LancamentoService,
     private categoriaService: CategoriaService,
@@ -39,10 +40,13 @@ export class LancamentoCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private title: Title,
-    private auth: AuthService
+    private auth: AuthService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+
+    this.configurarFormulario();
 
     const codigo = this.route.snapshot.params['codigo'];
 
@@ -53,6 +57,28 @@ export class LancamentoCadastroComponent implements OnInit {
     }
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  configurarFormulario() {
+
+    this.formulario = this.formBuilder.group({
+
+      codigo: [],
+      tipo: [ 'RECEITA', Validators.required ],
+      dataVencimento: [ null, Validators.required ],
+      dataPagamento: [],
+      descricao: [null, [ Validators.required, Validators.minLength(5) ]],
+      valor: [ null, Validators.required ],
+      pessoa: this.formBuilder.group({
+        codigo: [ null, Validators.required ],
+        nome: []
+      }),
+      categoria: this.formBuilder.group({
+        codigo: [ null, Validators.required ],
+        nome: []
+      }),
+      observacao: []
+    });
   }
 
   get editando() {
@@ -68,9 +94,9 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  salvar(form: FormControl){
+  salvar(form: FormControl) {
 
-    if (this.editando){
+    if (this.editando) {
 
       this.atualizar(form);
 
@@ -81,7 +107,7 @@ export class LancamentoCadastroComponent implements OnInit {
     }
   }
 
-  atualizar(form: FormControl){
+  atualizar(form: FormControl) {
     this.lancamentoService.atualizar(this.lancamento)
       .then(lancamento => {
         this.lancamento = lancamento;
@@ -92,7 +118,7 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  adicionar(form: FormControl){
+  adicionar(form: FormControl) {
     this.lancamentoService.salvar(this.lancamento)
       .then(lancamentoAdicionado => {
         this.toasty.success('Lancamento adicionado com sucesso.');
@@ -102,7 +128,7 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  carregarCategorias(){
+  carregarCategorias() {
     return this.categoriaService.listarTodas()
       .then(categorias => {
         this.categorias = categorias.map(cat => {
@@ -112,7 +138,7 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  carregarPessoas(){
+  carregarPessoas() {
     return this.pessoaService.listarTodas()
       .then(pessoas => {
         this.pessoas = pessoas.map(pess => {
@@ -132,7 +158,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.router.navigate(['/lancamentos/novo']);
   }
 
-  atualizarTituloEdicao(){
+  atualizarTituloEdicao() {
     this.title.setTitle(`Edição de Lançamento: ${this.lancamento.descricao}`);
   }
 
