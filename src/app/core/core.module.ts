@@ -22,6 +22,7 @@ import { PessoaModule } from '../pessoa/pessoa.module';
 import { SegurancaModule } from '../seguranca/seguranca.module';
 import { AuthService } from '../seguranca/auth.service';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
+import { DashboardModule } from 'app/dashboard/dashboard.module';
 
 registerLocaleData(localePt);
 
@@ -36,6 +37,7 @@ registerLocaleData(localePt);
     CategoriaModule,
     LancamentoModule,
     PessoaModule,
+    DashboardModule,
     SegurancaModule
 
 

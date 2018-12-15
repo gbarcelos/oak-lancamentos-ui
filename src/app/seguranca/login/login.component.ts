@@ -21,7 +21,7 @@ export class LoginComponent {
 
     this.authService.login(usuario, senha)
       .then(() => {
-        this.router.navigate(['/lancamentos']);
+        this.router.navigate(['/dashboard']);
       })
       .catch(erro => {
         this.errorHandler.handle(erro);
