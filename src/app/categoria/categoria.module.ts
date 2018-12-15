@@ -38,6 +38,6 @@ import { CategoriaRoutingModule } from './categoria-routing.module';
     CategoriaRoutingModule
   ],
   declarations: [CategoriaPesquisaComponent],
-  exports:[CategoriaPesquisaComponent]
+  exports: [CategoriaPesquisaComponent]
 })
 export class CategoriaModule { }

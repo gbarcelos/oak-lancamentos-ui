@@ -5,29 +5,33 @@ import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.compo
 import { NaoAutorizadoComponent } from './core/nao-autorizado.component';
 
 const routes: Routes = [
-    {
-       path: '',
-       redirectTo: 'dashboard',
-       pathMatch: 'full'
-    },
-    {
-      path: 'nao-autorizado',
-      component: NaoAutorizadoComponent
-    },
-    {
-      path: 'pagina-nao-encontrada',
-      component: PaginaNaoEncontradaComponent
-    },
-    {
-      path: '**',
-      redirectTo: 'pagina-nao-encontrada'
-    }
-  ];
+  {
+    path: 'categorias',
+    loadChildren: 'app/categoria/categoria.module#CategoriaModule'
+  },
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: 'nao-autorizado',
+    component: NaoAutorizadoComponent
+  },
+  {
+    path: 'pagina-nao-encontrada',
+    component: PaginaNaoEncontradaComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'pagina-nao-encontrada'
+  }
+];
 
-  @NgModule({
-    imports: [
-      RouterModule.forRoot(routes)
-    ],
-    exports: [RouterModule]
-  })
-  export class AppRoutingModule { }
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

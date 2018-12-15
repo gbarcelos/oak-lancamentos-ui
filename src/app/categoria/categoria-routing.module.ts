@@ -6,7 +6,7 @@ import { CategoriaPesquisaComponent } from './categoria-pesquisa/categoria-pesqu
 
 const routes: Routes = [
     {
-        path: 'categorias',
+        path: '',
         component: CategoriaPesquisaComponent,
         canActivate: [AuthGuard],
         data: { roles: ['ROLE_PESQUISAR_CATEGORIA'] }
