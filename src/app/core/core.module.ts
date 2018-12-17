@@ -19,6 +19,7 @@ import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { CategoriaService } from '../categoria/categoria.service';
 import { LancamentoService } from '../lancamento/lancamento.service';
 import { PessoaService } from '../pessoa/pessoa.service';
+import { DashboardService } from './../dashboard/dashboard.service';
 
 import { LancamentoModule } from '../lancamento/lancamento.module';
 import { PessoaModule } from '../pessoa/pessoa.module';
@@ -55,6 +56,7 @@ registerLocaleData(localePt);
   LancamentoService,
   PessoaService,
   CategoriaService,
+  DashboardService,
   ConfirmationService,
   AuthService,
   ErrorHandlerService,
