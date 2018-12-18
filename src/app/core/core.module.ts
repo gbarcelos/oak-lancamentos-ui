@@ -25,6 +25,7 @@ import { LancamentoModule } from '../lancamento/lancamento.module';
 import { PessoaModule } from '../pessoa/pessoa.module';
 import { DashboardModule } from 'app/dashboard/dashboard.module';
 import { SegurancaModule } from '../seguranca/seguranca.module';
+import { RelatoriosModule } from 'app/relatorios/relatorios.module';
 
 registerLocaleData(localePt);
 
@@ -39,6 +40,7 @@ registerLocaleData(localePt);
     LancamentoModule,
     PessoaModule,
     DashboardModule,
+    RelatoriosModule,
     SegurancaModule
 
   ],

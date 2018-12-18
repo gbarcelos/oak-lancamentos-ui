@@ -10,6 +10,10 @@ const routes: Routes = [
     loadChildren: 'app/categoria/categoria.module#CategoriaModule'
   },
   {
+    path: 'relatorios',
+    loadChildren: 'app/relatorios/relatorios.module#RelatoriosModule'
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
