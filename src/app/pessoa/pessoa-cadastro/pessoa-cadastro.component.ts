@@ -16,6 +16,7 @@ import { AuthService } from '../../seguranca/auth.service';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
+  exbindoFormularioContato = false;
 
   constructor(
     private pessoaService: PessoaService,
@@ -37,6 +38,10 @@ export class PessoaCadastroComponent implements OnInit {
     }
   }
 
+  prepararNovoContato() {
+    this.exbindoFormularioContato = true;
+  }
+
   get editando() {
     return Boolean(this.pessoa.codigo)
   }
@@ -50,9 +55,9 @@ export class PessoaCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  salvar(form: FormControl){
+  salvar(form: FormControl) {
 
-    if (this.editando){
+    if (this.editando) {
 
       this.atualizar(form);
 
@@ -63,7 +68,7 @@ export class PessoaCadastroComponent implements OnInit {
     }
   }
 
-  atualizar(form: FormControl){
+  atualizar(form: FormControl) {
     this.pessoaService.atualizar(this.pessoa)
       .then(pessoa => {
         this.pessoa = pessoa;
@@ -74,12 +79,11 @@ export class PessoaCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  adicionar(form: FormControl){
+  adicionar(form: FormControl) {
     this.pessoaService.salvar(this.pessoa)
       .then(pessoaAdicionada => {
         this.toasty.success('Pessoa adicionada com sucesso.');
-        //form.reset();
-        //this.pessoa = new Pessoa();
+
         this.router.navigate(['/pessoas', pessoaAdicionada.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -88,14 +92,14 @@ export class PessoaCadastroComponent implements OnInit {
   novo(form: FormControl) {
     form.reset();
 
-    setTimeout(function() {
+    setTimeout(function () {
       this.pessoa = new Pessoa();
     }.bind(this), 1);
 
     this.router.navigate(['/pessoas/novo']);
   }
 
-  atualizarTituloEdicao(){
+  atualizarTituloEdicao() {
     this.title.setTitle(`Edição de Pessoa: ${this.pessoa.nome}`);
   }
 }
