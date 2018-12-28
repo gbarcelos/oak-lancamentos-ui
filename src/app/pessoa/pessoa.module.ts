@@ -20,6 +20,7 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
 import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
 import { RouterModule } from '@angular/router';
 import { PessoaRoutingModule } from './pessoa-routing.module';
+import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa-cadastro-contato.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,7 @@ import { PessoaRoutingModule } from './pessoa-routing.module';
     SharedModule,
     PessoaRoutingModule
   ],
-  declarations: [PessoaCadastroComponent, PessoaPesquisaComponent],
+  declarations: [PessoaCadastroComponent, PessoaPesquisaComponent, PessoaCadastroContatoComponent],
   exports:[PessoaCadastroComponent, PessoaPesquisaComponent]
 })
 export class PessoaModule { }
