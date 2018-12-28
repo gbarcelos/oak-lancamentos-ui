@@ -23,7 +23,11 @@ export class LancamentoService {
 
   constructor(private http: AuthHttp) {
     this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
-   }
+  }
+
+  urlUploadAnexo(): string {
+    return `${this.lancamentosUrl}/anexo`;
+  }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
 
@@ -72,7 +76,7 @@ export class LancamentoService {
   salvar(lancamento: Lancamento): Promise<Lancamento> {
 
     return this.http.post(this.lancamentosUrl,
-        JSON.stringify(lancamento))
+      JSON.stringify(lancamento))
       .toPromise()
       .then(response => response.json());
   }
@@ -81,7 +85,7 @@ export class LancamentoService {
   atualizar(lancamento: Lancamento): Promise<Lancamento> {
 
     return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`,
-        JSON.stringify(lancamento))
+      JSON.stringify(lancamento))
       .toPromise()
       .then(response => {
         const lancamentoAlterado = response.json() as Lancamento;

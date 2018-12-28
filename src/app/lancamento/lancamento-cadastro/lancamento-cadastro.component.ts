@@ -59,22 +59,30 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarPessoas();
   }
 
+  antesUploadAnexo(event) {
+    event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+  }
+
+  get urlUploadAnexo() {
+    return this.lancamentoService.urlUploadAnexo();
+  }
+
   configurarFormulario() {
 
     this.formulario = this.formBuilder.group({
 
       codigo: [],
-      tipo: [ 'RECEITA', Validators.required ],
-      dataVencimento: [ null, Validators.required ],
+      tipo: ['RECEITA', Validators.required],
+      dataVencimento: [null, Validators.required],
       dataPagamento: [],
-      descricao: [null, [ this.validarObrigatoriedade, this.validarTamanhoMinimo(5) ]],
-      valor: [ null, Validators.required ],
+      descricao: [null, [this.validarObrigatoriedade, this.validarTamanhoMinimo(5)]],
+      valor: [null, Validators.required],
       pessoa: this.formBuilder.group({
-        codigo: [ null, Validators.required ],
+        codigo: [null, Validators.required],
         nome: []
       }),
       categoria: this.formBuilder.group({
-        codigo: [ null, Validators.required ],
+        codigo: [null, Validators.required],
         nome: []
       }),
       observacao: []
@@ -148,7 +156,7 @@ export class LancamentoCadastroComponent implements OnInit {
     return this.categoriaService.listarTodas()
       .then(categorias => {
         this.categorias = categorias.map(cat => {
-          return {label: cat.nome, value: cat.codigo};
+          return { label: cat.nome, value: cat.codigo };
         });
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -158,7 +166,7 @@ export class LancamentoCadastroComponent implements OnInit {
     return this.pessoaService.listarTodas()
       .then(pessoas => {
         this.pessoas = pessoas.map(pess => {
-          return {label: pess.nome, value: pess.codigo};
+          return { label: pess.nome, value: pess.codigo };
         });
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -168,7 +176,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
     this.formulario.reset();
 
-    setTimeout(function() {
+    setTimeout(function () {
       this.lancamento = new Lancamento();
     }.bind(this), 1);
 
