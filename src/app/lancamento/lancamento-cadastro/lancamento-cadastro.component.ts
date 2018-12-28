@@ -63,8 +63,23 @@ export class LancamentoCadastroComponent implements OnInit {
     event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
   }
 
-  get urlUploadAnexo() {
-    return this.lancamentoService.urlUploadAnexo();
+  aoTerminarUploadAnexo(event) {
+    const anexo = JSON.parse(event.xhr.response);
+
+    this.formulario.patchValue({
+      anexo: anexo.nome,
+      urlAnexo: anexo.url
+    });
+  }
+
+  get nomeAnexo() {
+    const nome = this.formulario.get('anexo').value;
+
+    if (nome) {
+      return nome.substring(nome.indexOf('_') + 1, nome.length);
+    }
+
+    return '';
   }
 
   configurarFormulario() {
@@ -85,7 +100,9 @@ export class LancamentoCadastroComponent implements OnInit {
         codigo: [null, Validators.required],
         nome: []
       }),
-      observacao: []
+      observacao: [],
+      anexo: [],
+      urlAnexo: []
     });
   }
 
