@@ -18,7 +18,7 @@ export class PessoaCadastroComponent implements OnInit {
   pessoa = new Pessoa();
   estados: any[];
   cidades: any[];
-estadoSelecionado: number;
+  estadoSelecionado: number;
 
   constructor(
     private pessoaService: PessoaService,
@@ -46,15 +46,15 @@ estadoSelecionado: number;
     this.pessoaService.listarEstados().then(lista => {
       this.estados = lista.map(uf => ({ label: uf.nome, value: uf.codigo }));
     })
-    .catch(erro => this.errorHandler.handle(erro));
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCidades() {
     this.pessoaService.pesquisarCidades(this.estadoSelecionado).then(lista => {
       this.cidades = lista.map(c => ({ label: c.nome, value: c.codigo }));
     })
-    .catch(erro => this.errorHandler.handle(erro));
-}
+      .catch(erro => this.errorHandler.handle(erro));
+  }
 
   get editando() {
     return Boolean(this.pessoa.codigo)
@@ -64,6 +64,14 @@ estadoSelecionado: number;
     this.pessoaService.buscarPorCodigo(codigo)
       .then(pessoa => {
         this.pessoa = pessoa;
+
+        this.estadoSelecionado = (this.pessoa.endereco.cidade) ?
+          this.pessoa.endereco.cidade.estado.codigo : null;
+
+        if (this.estadoSelecionado) {
+          this.carregarCidades();
+        }
+
         this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
