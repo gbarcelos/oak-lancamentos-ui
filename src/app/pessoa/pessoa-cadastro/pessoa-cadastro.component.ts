@@ -16,6 +16,7 @@ import { AuthService } from '../../seguranca/auth.service';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
+  estados: any[];
 
   constructor(
     private pessoaService: PessoaService,
@@ -30,11 +31,20 @@ export class PessoaCadastroComponent implements OnInit {
   ngOnInit() {
     const codigo = this.route.snapshot.params['codigo'];
 
+    this.carregarEstados();
+
     if (codigo) {
       this.carregar(codigo);
     } else {
       this.title.setTitle('Cadastro de Pessoa');
     }
+  }
+
+  carregarEstados() {
+    this.pessoaService.listarEstados().then(lista => {
+      this.estados = lista.map(uf => ({ label: uf.nome, value: uf.codigo }));
+    })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   get editando() {
