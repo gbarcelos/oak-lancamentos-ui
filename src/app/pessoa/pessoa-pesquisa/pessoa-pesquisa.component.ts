@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PessoaService, PessoaFiltro } from '../pessoa.service';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { ConfirmationService } from 'primeng/components/common/api';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { AuthService } from '../../seguranca/auth.service';
@@ -20,16 +20,16 @@ export class PessoaPesquisaComponent implements OnInit {
 
   constructor(
     private pessoaService: PessoaService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
     private auth: AuthService
-  ){ }
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
-  pesquisar(pagina = 0){
+  pesquisar(pagina = 0) {
 
     this.filtro.pagina = pagina;
 
@@ -41,12 +41,12 @@ export class PessoaPesquisaComponent implements OnInit {
       });
   }
 
-  aoMudarPagina(event: LazyLoadEvent){
+  aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
   }
 
-  confirmacaoExcluir(lancamento: any){
+  confirmacaoExcluir(lancamento: any) {
 
     this.confirmation.confirm({
       message: 'Tem certeza que deseja excluir?',
@@ -57,15 +57,15 @@ export class PessoaPesquisaComponent implements OnInit {
 
   }
 
-  excluir(pesssoa: any){
+  excluir(pesssoa: any) {
     this.pessoaService.excluir(pesssoa.codigo)
       .then(() => {
-        if (this.grid.first === 0){
+        if (this.grid.first === 0) {
           this.pesquisar();
-        }else{
+        } else {
           this.grid.first = 0;
         }
-        this.toasty.success('Pessoa excluída com sucesso');
+        this.messageService.add({ severity: 'success', detail: 'Pessoa excluída com sucesso.' });
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -79,7 +79,8 @@ export class PessoaPesquisaComponent implements OnInit {
         const acao = novoStatus ? 'ativada' : 'desativada';
 
         pessoa.ativo = novoStatus;
-        this.toasty.success(`Pessoa ${acao} com sucesso!`);
+
+        this.messageService.add({ severity: 'success', detail: `Pessoa ${acao} com sucesso!` });
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastyService } from 'ng2-toasty';
 
 import { CategoriaFiltro, CategoriaService } from '../categoria.service';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/components/common/api';
@@ -19,17 +18,13 @@ export class CategoriaPesquisaComponent implements OnInit {
   @ViewChild('tabela') grid;
 
   constructor(
-    private categoriaService: CategoriaService,
-    private toasty: ToastyService,
-    private confirmation: ConfirmationService,
-    private errorHandler: ErrorHandlerService,
-    private auth: AuthService
-  ){ }
+    private categoriaService: CategoriaService
+  ) { }
 
   ngOnInit() {
   }
 
-  pesquisar(pagina = 0){
+  pesquisar(pagina = 0) {
 
     this.filtro.pagina = pagina;
 

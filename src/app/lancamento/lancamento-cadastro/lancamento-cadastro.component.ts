@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { Title } from '@angular/platform-browser';
 
 import { ErrorHandlerService } from '../../core/error-handler.service';
@@ -34,7 +34,7 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
@@ -79,7 +79,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   erroUpload(event) {
-    this.toasty.error('Erro ao tentar enviar anexo!');
+    this.messageService.add({ severity: 'error', detail: 'Erro ao tentar enviar anexo!' });
 
     this.uploadEmAndamento = false;
   }
@@ -174,7 +174,7 @@ export class LancamentoCadastroComponent implements OnInit {
       .then(lancamento => {
         this.formulario.patchValue(lancamento);
 
-        this.toasty.success('Lancamento atualizado com sucesso.');
+        this.messageService.add({ severity: 'success', detail: 'Lancamento atualizado com sucesso.' });
         this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -184,7 +184,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
     this.lancamentoService.salvar(this.formulario.value)
       .then(lancamentoAdicionado => {
-        this.toasty.success('Lancamento adicionado com sucesso.');
+        this.messageService.add({ severity: 'success', detail: 'Lancamento adicionado com sucesso.' });
 
         this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo]);
       })
