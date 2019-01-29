@@ -1,31 +1,30 @@
 import { Injectable } from '@angular/core';
 
-import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/operator/toPromise';
 import * as moment from 'moment';
 
 import { environment } from './../../environments/environment';
+import { MoneyHttp } from 'app/seguranca/money-http';
 
 @Injectable()
 export class DashboardService {
 
   lancamentosUrl: string;
 
-  constructor(private http: AuthHttp) {
+  constructor(private http: MoneyHttp) {
     this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
   }
 
   lancamentosPorCategoria(): Promise<Array<any>> {
-    return this.http.get(`${this.lancamentosUrl}/estatisticas/por-categoria`)
-      .toPromise()
-      .then(response => response.json());
+    return this.http.get<Array<any>>(`${this.lancamentosUrl}/estatisticas/por-categoria`)
+      .toPromise();
   }
 
   lancamentosPorDia(): Promise<Array<any>> {
-    return this.http.get(`${this.lancamentosUrl}/estatisticas/por-dia`)
+    return this.http.get<Array<any>>(`${this.lancamentosUrl}/estatisticas/por-dia`)
       .toPromise()
       .then(response => {
-        const dados = response.json();
+        const dados = response;
         this.converterStringsParaDatas(dados);
 
         return dados;

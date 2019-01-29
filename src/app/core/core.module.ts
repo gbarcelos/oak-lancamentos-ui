@@ -3,7 +3,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 import { GrowlModule } from 'primeng/growl';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
@@ -28,6 +28,7 @@ import { PessoaModule } from '../pessoa/pessoa.module';
 import { DashboardModule } from 'app/dashboard/dashboard.module';
 import { SegurancaModule } from '../seguranca/seguranca.module';
 import { RelatoriosModule } from 'app/relatorios/relatorios.module';
+import { MoneyHttp } from 'app/seguranca/money-http';
 
 registerLocaleData(localePt);
 
@@ -64,9 +65,11 @@ registerLocaleData(localePt);
   ConfirmationService,
   RelatoriosService,
   AuthService,
+  MoneyHttp,
+
   ErrorHandlerService,
   Title,
-  JwtHelper,
+  JwtHelperService,
   MessageService,
   {provide: LOCALE_ID, useValue: 'pt'}
   ]
