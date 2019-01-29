@@ -1,4 +1,4 @@
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
@@ -29,8 +29,7 @@ export class PessoaService {
   listarTodas(): Promise<any> {
 
     return this.http.get<any>(`${this.pessoasUrl}?listar`)
-      .toPromise()
-      .then(response => response.content);
+      .toPromise();
   }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
@@ -45,7 +44,6 @@ export class PessoaService {
     if (filtro.nome) {
       params = params.append('nome', filtro.nome);
     }
-
 
     return this.http.get<any>(`${this.pessoasUrl}?resumo`, { params })
       .toPromise()
@@ -75,8 +73,9 @@ export class PessoaService {
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
+    const headers = new HttpHeaders().append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo)
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()
       .then(() => null);
   }
